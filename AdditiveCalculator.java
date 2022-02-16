@@ -8,8 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener; 
 
 public class AdditiveCalculator extends JFrame implements ActionListener{
-        JTextField bath_box,standard_box,bath_ideal_box,standard_ideal_box,volume_box;
-        JLabel bath_label,standard_label,bath_ideal_label,standard_ideal_label,volume_label;
+        JTextField bath_box,standard_box,bath_ideal_box,standard_ideal_box,volume_box,return_box;
+        JLabel bath_label,standard_label,bath_ideal_label,standard_ideal_label,volume_label,return_label;
         // private JTextField standard_ideal_text;
         public static void main(String[] args){
             new AdditiveCalculator().display(); 
@@ -24,15 +24,18 @@ public class AdditiveCalculator extends JFrame implements ActionListener{
             button.addActionListener(this);
             
             bath_box = new JTextField(); 
-            bath_box.setBounds(65,40,100,20);
+            bath_box.setBounds(100,40,100,20);
             standard_box = new JTextField(); 
-            standard_box.setBounds(65,60,100,20);
+            standard_box.setBounds(100,60,100,20);
             bath_ideal_box = new JTextField(); 
-            bath_ideal_box.setBounds(65,80,100,20);
+            bath_ideal_box.setBounds(100,80,100,20);
             standard_ideal_box = new JTextField(); 
-            standard_ideal_box.setBounds(65,100,100,20);
+            standard_ideal_box.setBounds(100,100,100,20);
             volume_box = new JTextField(); 
-            volume_box.setBounds(65,120,100,20);
+            volume_box.setBounds(100,120,100,20);
+            return_box = new JTextField();
+            return_box.setBounds(60,160,100,20);
+
             bath_label = new JLabel("Bath"); 
             bath_label.setBounds(25,40,100,20);
             standard_label = new JLabel("Standard");
@@ -43,6 +46,9 @@ public class AdditiveCalculator extends JFrame implements ActionListener{
             standard_ideal_label.setBounds(25,100,100,20); 
             volume_label = new JLabel("Volume"); 
             volume_label.setBounds(25,120,100,20);
+            return_label = new JLabel("Return"); 
+            return_label.setBounds(60,180,100,20); 
+
             c.add(button);
             c.add(bath_box);
             c.add(bath_label);
@@ -54,7 +60,10 @@ public class AdditiveCalculator extends JFrame implements ActionListener{
             c.add(standard_ideal_label); 
             c.add(volume_box); 
             c.add(volume_label);
+            c.add(return_box); 
+            c.add(return_label);
             setVisible(true);
+
         }
         public void actionPerformed(ActionEvent evt){
             String s = evt.getActionCommand(); 
@@ -63,6 +72,7 @@ public class AdditiveCalculator extends JFrame implements ActionListener{
             String bath_ideal_text = bath_ideal_box.getText(); 
             String standard_ideal_text = standard_ideal_box.getText(); 
             String volume_text = volume_box.getText(); 
+
             //Casting
             int bath_num = Integer.parseInt(bath_text);
             int standard_num = Integer.parseInt(standard_text);
@@ -70,6 +80,7 @@ public class AdditiveCalculator extends JFrame implements ActionListener{
             int standard_ideal_num = Integer.parseInt(standard_ideal_text);
             int volume_num = Integer.parseInt(volume_text);
 
+            //Control Loop
             if (bath_text == ""){
                 bath_box.setText("Enter measured Bath value.");
             }
@@ -88,7 +99,7 @@ public class AdditiveCalculator extends JFrame implements ActionListener{
             else{
                 Calculations run_calc = new Calculations();
                 int num = run_calc.additiveCalculation(bath_num, standard_num, bath_ideal_num, standard_ideal_num, volume_num);
-                System.out.println(num);
+                return_box.setText(String.valueOf(num));;
             }
 
         }
